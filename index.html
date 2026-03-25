@@ -630,7 +630,7 @@
 
     try {
       // Submit URL
-      const submitRes = await fetch('https://www.virustotal.com/api/v3/urls', {
+      const submitRes = await fetch('https://threatscan-proxy.bennett-baker86.workers.dev/vt/urls', {
         method: 'POST',
         headers: {
           'x-apikey': apiKey,
@@ -655,7 +655,7 @@
 
       while (attempts < 10) {
         await sleep(2500);
-        const pollRes = await fetch(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
+        const pollRes = await fetch(`https://threatscan-proxy.bennett-baker86.workers.dev/vt/analyses/${analysisId}`, {
           headers: { 'x-apikey': apiKey }
         });
         const pollData = await pollRes.json();
@@ -671,7 +671,7 @@
       if (!analysisData) {
         // Try getting URL report directly
         const urlId = btoa(url).replace(/=/g, '');
-        const reportRes = await fetch(`https://www.virustotal.com/api/v3/urls/${urlId}`, {
+        const reportRes = await fetch(`https://threatscan-proxy.bennett-baker86.workers.dev/vt/urls/${urlId}`, {
           headers: { 'x-apikey': apiKey }
         });
         if (reportRes.ok) {
@@ -775,7 +775,7 @@
     const card = document.getElementById(cardId);
 
     try {
-      const submitRes = await fetch('https://urlscan.io/api/v1/scan/', {
+      const submitRes = await fetch('https://threatscan-proxy.bennett-baker86.workers.dev/us/scan/', {
         method: 'POST',
         headers: {
           'API-Key': apiKey,
@@ -803,7 +803,7 @@
 
       while (attempts < 12) {
         await sleep(5000);
-        const pollRes = await fetch(`https://urlscan.io/api/v1/result/${scanUuid}/`);
+        const pollRes = await fetch(`https://threatscan-proxy.bennett-baker86.workers.dev/us/result/${scanUuid}/`);
         if (pollRes.ok) {
           resultData = await pollRes.json();
           break;
